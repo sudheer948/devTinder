@@ -66,10 +66,13 @@ app.patch("/user", async (req, res) => {
   const data = req.body; // we can update the data just by passing from the body also in postman
 
   try {
-    await User.findByIdAndUpdate({ _id: userId }, req.body);
+    await User.findByIdAndUpdate({ _id: userId }, data, {
+      returnDocument: "after",
+      runValidators: true,
+    });
     res.send("updated successfully...");
   } catch (err) {
-    res.status(400).send("something went wrong...");
+    res.status(400).send("something went wrong..." + err.message);
   }
 });
 
