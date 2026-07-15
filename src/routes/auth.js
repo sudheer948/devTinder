@@ -46,6 +46,7 @@ authRouter.post("/login", async (req, res) => {
     }
 
     const isPasswordValid = await user.validatePassword(password);
+    console.log(isPasswordValid);
 
     if (isPasswordValid) {
       const token = await user.getJWT();
